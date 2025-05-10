@@ -1,0 +1,9 @@
+[project]
+name = "numbers-28x28"
+version = "0.1.0"
+description = "A perceptron implementation using the MNIST dataset"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.2.5",
+]
