@@ -48,6 +48,6 @@ class MnistDataloader(object):
         return images, labels
 
     def load_data(self) -> Tuple[Tuple[List[np.ndarray], array], Tuple[List[np.ndarray], array]]:
-        x_train, y_train = self.read_images_labels(self.training_images_filepath, self.training_labels_filepath)
-        x_test, y_test = self.read_images_labels(self.test_images_filepath, self.test_labels_filepath)
-        return (x_train, y_train), (x_test, y_test)
+        train_images, train_labels = self.read_images_labels(self.training_images_filepath, self.training_labels_filepath)
+        test_images, test_labels = self.read_images_labels(self.test_images_filepath, self.test_labels_filepath)
+        return (train_images, train_labels), (test_images, test_labels)
