@@ -16,7 +16,7 @@ class MnistDataloader(object):
         with open(labels_filepath, 'rb') as file:
             magic, size = struct.unpack(">II", file.read(8))
             if magic != 2049:
-                raise ValueEFrror('Magic number mismatch, expected 2049, got {}'.format(magic))
+                raise ValueError('Magic number mismatch, expected 2049, got {}'.format(magic))
             labels = array("B", file.read())
 
         with open(images_filepath, 'rb') as file:
