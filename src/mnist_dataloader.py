@@ -2,17 +2,28 @@ import numpy as np # linear algebra
 import struct
 from array import array
 from os.path  import join
+from typing import List, Tuple
 
 class MnistDataloader(object):
-    def __init__(self, training_images_filepath,training_labels_filepath,
-                 test_images_filepath, test_labels_filepath):
+    def __init__(
+            self,
+            training_images_filepath: str,
+            training_labels_filepath: str,
+            test_images_filepath: str,
+            test_labels_filepath: str
+            ) -> None:
         self.training_images_filepath = training_images_filepath
         self.training_labels_filepath = training_labels_filepath
         self.test_images_filepath = test_images_filepath
         self.test_labels_filepath = test_labels_filepath
 
-    def read_images_labels(self, images_filepath, labels_filepath):
-        labels = []
+    def read_images_labels(
+            self,
+            images_filepath: str,
+            labels_filepath: str
+            ) -> Tuple[List[np.ndarray], array]:
+
+        labels: array = array("B")
         with open(labels_filepath, 'rb') as file:
             magic, size = struct.unpack(">II", file.read(8))
             if magic != 2049:
@@ -24,9 +35,11 @@ class MnistDataloader(object):
             if magic != 2051:
                 raise ValueError('Magic number mismatch, expected 2051, got {}'.format(magic))
             image_data = array("B", file.read())
-        images = []
+        images: List[np.ndarray] = []
+
         for i in range(size):
             images.append([0] * rows * cols)
+
         for i in range(size):
             img = np.array(image_data[i * rows * cols:(i + 1) * rows * cols])
             img = img.reshape(28, 28)
@@ -34,7 +47,7 @@ class MnistDataloader(object):
 
         return images, labels
 
-    def load_data(self):
+    def load_data(self) -> Tuple[Tuple[List[np.ndarray], array], Tuple[List[np.ndarray], array]]:
         x_train, y_train = self.read_images_labels(self.training_images_filepath, self.training_labels_filepath)
         x_test, y_test = self.read_images_labels(self.test_images_filepath, self.test_labels_filepath)
-        return (x_train, y_train),(x_test, y_test)
+        return (x_train, y_train), (x_test, y_test)
