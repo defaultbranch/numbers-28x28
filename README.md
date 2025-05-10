@@ -18,8 +18,25 @@ MNIST data is available from <https://www.kaggle.com/datasets/hojjatk/mnist-data
 
 # Execution
 
-Training data is expected in a folder `mnist/`. Given that, run:
+Training data is expected in a folder `mnist/`:
 
+```
+$ tree .
+.
+├── README.md
+├── LICENSE
+├── pyproject.toml
+├── uv.lock
+├── src
+│   └── ...
+└── mnist
+    ├── t10k-images.idx3-ubyte
+    ├── t10k-labels.idx1-ubyte
+    ├── train-images.idx3-ubyte
+    └── train-labels.idx1-ubyte
+```
+
+Given that, run:
 ```
 python src/main.py
 ```
