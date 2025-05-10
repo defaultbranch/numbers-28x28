@@ -33,19 +33,21 @@ def main():
         test_images_filepath,
         test_labels_filepath
         )
-    (x_train, y_train), (x_test, y_test) = mnist_dataloader.load_data()
+
+    training_images, training_labels = mnist_dataloader.read_images_labels(training_images_filepath, training_labels_filepath)
+    test_images, test_labels = mnist_dataloader.read_images_labels(test_images_filepath, test_labels_filepath)
 
     images_2_show = []
     titles_2_show = []
     for i in range(0, 10):
         r = random.randint(1, 60000)
-        images_2_show.append(x_train[r])
-        titles_2_show.append('training image [' + str(r) + '] = ' + str(y_train[r]))
+        images_2_show.append(training_images[r])
+        titles_2_show.append('training image [' + str(r) + '] = ' + str(training_labels[r]))
 
     for i in range(0, 5):
         r = random.randint(1, 10000)
-        images_2_show.append(x_test[r])
-        titles_2_show.append('test image [' + str(r) + '] = ' + str(y_test[r]))
+        images_2_show.append(test_images[r])
+        titles_2_show.append('test image [' + str(r) + '] = ' + str(test_labels[r]))
 
     show_images(images_2_show, titles_2_show)
 
